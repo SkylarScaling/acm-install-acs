@@ -35,7 +35,7 @@ kind: Subscription
 metadata:
   annotations:
     apps.open-cluster-management.io/git-branch: main
-    # apps.open-cluster-management.io/git-path: N/A
+    apps.open-cluster-management.io/git-path: kustomize
     apps.open-cluster-management.io/reconcile-option: merge
   labels:
     app: acs-install-policies
