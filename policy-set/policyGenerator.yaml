@@ -1,0 +1,98 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: policy-openshift-acs
+placementBindingDefaults:
+  name: binding-policy-openshift-acs-hub
+policyDefaults:
+  categories:
+    - CM Configuration Management
+  controls: 
+    - CM-2 Baseline Configuration
+  namespace: policies
+  policySets:
+    - openshift-acs-hub
+  remediationAction: enforce
+  severity: medium
+  standards:
+    - NIST SP 800-53
+policies:
+# ACS Policies - start
+- name: policy-acs-operator-central
+  categories:
+    - SC System and Communications Protection
+  controls: 
+    - SC-1 Policy and Procedures
+  manifests:
+    - path: input-acs-central/policy-acs-operator-central.yaml
+- name: policy-acs-central-status
+  categories:
+    - SI System and Information Integrity
+  controls:
+    - SI-5 Security Alerts Advisories and Directives
+  manifests:
+    - path: input-acs-central/policy-acs-central-status.yaml
+  remediationAction: inform
+- name: policy-acs-central-ca-bundle
+  categories:
+    - SI System and Information Integrity
+  controls:
+    - SI-5 Security Alerts Advisories and Directives
+  manifests:
+    - path: input-sensor/policy-acs-central-ca-bundle.yaml
+- name: policy-acs-sync-resources
+  categories:
+    - SI System and Information Integrity
+  consolidateManifests: false
+  controls:
+    - SI-5 Security Alerts Advisories and Directives
+  manifests:
+    - path: input-sensor/policy-acs-sync-resources.yaml
+- name: policy-advanced-managed-cluster-security
+  categories:
+    - SI System and Information Integrity
+  consolidateManifests: false
+  controls:
+    - SI-5 Security Alerts Advisories and Directives
+  manifests:
+    - path: input-sensor/policy-advanced-managed-cluster-security.yaml
+  policySets:
+    - openshift-acs-clusters
+- name: policy-advanced-managed-cluster-status
+  categories:
+    - SI System and Information Integrity
+  controls:
+    - SI-5 Security Alerts Advisories and Directives
+  manifests:
+    - path: input-sensor/policy-advanced-managed-cluster-status.yaml
+  policySets:
+    - openshift-acs-hub
+    - openshift-acs-clusters
+  remediationAction: inform
+# ACS Policies - end
+# Compliance Operator Policies - start
+- name: policy-compliance-operator-install
+  categories:
+    - CA Security Assessment and Authorization
+  controls:
+    - CA-2 Security Assessments
+    - CA-7 Continuous Monitoring
+  manifests:
+    - path: input-compliance/
+  policySets:
+    - openshift-acs-clusters
+    - openshift-acs-hub
+# Compliance Operator Policies - end
+policySets:
+  - description: The OpenShift ACS policy set applies several policies
+      that will install ACS using best practices. This policy set is focused on 
+      the components that install to the Advanced Cluster Management hub.
+    name: openshift-acs-hub
+    placement:
+      placementPath: input/hub-placement.yaml
+  - description: The OpenShift ACS policy set applies several policies
+      that install ACS using best practices. This policy set is focused on 
+      the components that install to every managed cluster.
+    name: openshift-acs-clusters
+    placement:
+      placementPath: input/clusters-placement.yaml
