@@ -6,8 +6,8 @@ metadata:
 apiVersion: app.k8s.io/v1beta1
 kind: Application
 metadata:
-  name: acs-policies
-  namespace: acs-policies
+  name: acs-install-policies
+  namespace: acs-install-policies
 spec:
   componentKinds:
     - group: apps.open-cluster-management.io
@@ -24,8 +24,8 @@ kind: Channel
 metadata:
   annotations:
     apps.open-cluster-management.io/reconcile-rate: medium
-  name: acs-install-policies
-  namespace: acs-policies
+  name: acs-install-policies-channel
+  namespace: acs-install-policies
 spec:
   type: Git
   pathname: https://github.com/skylarscaling/acm-install-acs.git
@@ -40,9 +40,9 @@ metadata:
   labels:
     app: acs-install-policies
   name: acs-install-policies-subscription
-  namespace: acs-policies
+  namespace: acs-install-policies
 spec:
-  channel: acs-policies/acs-install-policies
+  channel: acs-install-policies/acs-install-policies-channel
   placement:
     placementRef:
       kind: PlacementRule
@@ -54,7 +54,7 @@ metadata:
   labels:
     app: acs-install-policies
   name: acs-install-policies-placement
-  namespace: acs-policies
+  namespace: acs-install-policies
 spec:
   clusterConditions:
     - status: "True"

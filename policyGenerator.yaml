@@ -1,7 +1,7 @@
 apiVersion: policy.open-cluster-management.io/v1
 kind: PolicyGenerator
 metadata:
-  name: policy-openshift-acs
+  name: policy-openshift-acs-install
 placementBindingDefaults:
   name: binding-policy-openshift-acs-hub
 policyDefaults:
@@ -9,7 +9,7 @@ policyDefaults:
     - CM Configuration Management
   controls: 
     - CM-2 Baseline Configuration
-  namespace: policies
+  namespace: acs-install-policies
   policySets:
     - openshift-acs-hub
   remediationAction: enforce
