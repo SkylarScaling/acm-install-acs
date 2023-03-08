@@ -4,8 +4,6 @@ metadata:
   name: placement-openshift-acs-hub
   namespace: acs-install-policies
 spec:
-  predicates:
-  - requiredClusterSelector:
-      labelSelector:
-        matchExpressions:
-          - {key: name, operator: In, values: ["local-cluster"]}
+  clusterSelector:
+    matchLabels:
+      name: local-cluster

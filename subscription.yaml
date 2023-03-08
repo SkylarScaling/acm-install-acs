@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: acs-policies
+  name: acs-install-policies
 ---
 apiVersion: app.k8s.io/v1beta1
 kind: Application
@@ -60,8 +60,5 @@ spec:
     - status: "True"
       type: ManagedClusterConditionAvailable
   clusterSelector:
-    matchExpressions:
-      - key: local-cluster
-        operator: In
-        values:
-          - "true"
+    matchLabels:
+      name: local-cluster
