@@ -56,9 +56,6 @@ metadata:
   name: acs-install-policies-placement
   namespace: acs-install-policies
 spec:
-  clusterConditions:
-    - status: "True"
-      type: ManagedClusterConditionAvailable
   clusterSelector:
     matchLabels:
       name: local-cluster
