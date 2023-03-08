@@ -6,10 +6,10 @@ metadata:
 spec:
   clusterSelector:
     matchExpressions:
-      - key: vendor
-        values:
-        - OpenShift
-      - key: name
-        operator: NotIn
-        values:
-        - local-cluster
+    - key: vendor
+      values:
+      - OpenShift
+    - key: name
+      operator: NotIn
+      values:
+      - local-cluster
