@@ -10,6 +10,6 @@ spec:
       values:
       - OpenShift
     - key: name
-      operator: NotIn
+      operator: In
       values:
-      - local-cluster
+      - development
