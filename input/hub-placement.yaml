@@ -4,11 +4,6 @@ metadata:
   name: placement-openshift-acs-hub
   namespace: acs-install-policies
 spec:
-  clusterConditions:
-  - status: 'True'
-    type: ManagedClusterConditionAvailable
   clusterSelector:
-    matchExpressions:
-      - key: name
-        values:
-          - local-cluster
+    matchLabels:
+      name: local-cluster
