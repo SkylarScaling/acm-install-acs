@@ -5,11 +5,5 @@ metadata:
   namespace: acs-install-policies
 spec:
   clusterSelector:
-    matchExpressions:
-    - key: vendor
-      values:
-      - OpenShift
-    - key: name
-      operator: In
-      values:
-      - development
+    matchLabels:
+      name: development
