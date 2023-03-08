@@ -30,7 +30,7 @@ data:
 kind: Secret
 metadata:
   name: admission-control-tls
-  namespace: policies
+  namespace: acs-install-policies
 type: Opaque
 ---
 apiVersion: v1
@@ -41,7 +41,7 @@ data:
 kind: Secret
 metadata:
   name: collector-tls
-  namespace: policies
+  namespace: acs-install-policies
 type: Opaque
 ---
 apiVersion: v1
@@ -53,7 +53,7 @@ data:
 kind: Secret
 metadata:
   name: sensor-tls
-  namespace: policies
+  namespace: acs-install-policies
 type: Opaque
 ---
 apiVersion: console.openshift.io/v1
