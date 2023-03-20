@@ -24,14 +24,14 @@ policies:
   controls: 
     - SC-1 Policy and Procedures
   manifests:
-    - path: input-acs-central/policy-acs-operator-central.yaml
+    - path: acs-central/policy-acs-operator-central.yaml
 - name: policy-acs-central-status
   categories:
     - SI System and Information Integrity
   controls:
     - SI-5 Security Alerts Advisories and Directives
   manifests:
-    - path: input-acs-central/policy-acs-central-status.yaml
+    - path: acs-central/policy-acs-central-status.yaml
   remediationAction: inform
 - name: policy-acs-central-ca-bundle
   categories:
@@ -39,7 +39,7 @@ policies:
   controls:
     - SI-5 Security Alerts Advisories and Directives
   manifests:
-    - path: input-sensor/policy-acs-central-ca-bundle.yaml
+    - path: acs-sensor/policy-acs-central-ca-bundle.yaml
 - name: policy-acs-sync-resources
   categories:
     - SI System and Information Integrity
@@ -47,7 +47,7 @@ policies:
   controls:
     - SI-5 Security Alerts Advisories and Directives
   manifests:
-    - path: input-sensor/policy-acs-sync-resources.yaml
+    - path: acs-sensor/policy-acs-sync-resources.yaml
 - name: policy-advanced-managed-cluster-security
   categories:
     - SI System and Information Integrity
@@ -55,7 +55,7 @@ policies:
   controls:
     - SI-5 Security Alerts Advisories and Directives
   manifests:
-    - path: input-sensor/policy-advanced-managed-cluster-security.yaml
+    - path: acs-sensor/policy-advanced-managed-cluster-security.yaml
   policySets:
     - openshift-acs-clusters
 - name: policy-advanced-managed-cluster-status
@@ -64,7 +64,7 @@ policies:
   controls:
     - SI-5 Security Alerts Advisories and Directives
   manifests:
-    - path: input-sensor/policy-advanced-managed-cluster-status.yaml
+    - path: acs-sensor/policy-advanced-managed-cluster-status.yaml
   policySets:
     - openshift-acs-hub
     - openshift-acs-clusters
@@ -78,7 +78,7 @@ policies:
 #    - CA-2 Security Assessments
 #    - CA-7 Continuous Monitoring
 #  manifests:
-#    - path: input-compliance/
+#    - path: compliance-operator/
 #  policySets:
 #    - openshift-acs-clusters
 #    - openshift-acs-hub
@@ -89,10 +89,10 @@ policySets:
       the components that install to the Advanced Cluster Management hub.
     name: openshift-acs-hub
     placement:
-      placementRulePath: input/hub-placement.yaml
+      placementPath: placements/hub-placement.yaml
   - description: The OpenShift ACS policy set applies several policies
       that install ACS using best practices. This policy set is focused on 
       the components that install to every managed cluster.
     name: openshift-acs-clusters
     placement:
-      placementRulePath: input/clusters-placement.yaml
+      placementPath: placements/clusters-placement.yaml
