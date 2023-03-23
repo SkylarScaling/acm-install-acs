@@ -67,8 +67,7 @@ metadata:
   namespace: stackrox
   name: stackrox-secured-cluster-services
 spec:
-  clusterName: |
-    {{ fromSecret "open-cluster-management-agent" "hub-kubeconfig-secret" "cluster-name" | base64dec }}
+  clusterName: '{{hub fromSecret "open-cluster-management-agent" "hub-kubeconfig-secret" "cluster-name" | base64dec hub}}'
   auditLogs:
     collection: Auto
   centralEndpoint: |
