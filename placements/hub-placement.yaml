@@ -1,14 +1,9 @@
-apiVersion: cluster.open-cluster-management.io/v1beta1
-kind: Placement
+apiVersion: cluster.open-cluster-management.io/v1
+kind: PlacementRule
 metadata:
   name: placement-openshift-acs-hub
   namespace: acs-install-policies
 spec:
-  predicates:
-    - requiredClusterSelector:
-        labelSelector:
-          matchExpressions:
-            - key: name
-              operator: In
-              values:
-              - local-cluster
+  clusterSelector:
+    matchLabels:
+        name: local-cluster
