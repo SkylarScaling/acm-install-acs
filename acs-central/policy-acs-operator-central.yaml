@@ -34,6 +34,11 @@ metadata:
   name: stackrox-central-services
 spec:
   central:
+    declarativeConfiguration:
+      configMaps:
+        - name: "acs-config"
+#      secrets:
+#        - name: "<sensitive-declarative-configs>"
     exposure:
       loadBalancer:
         enabled: false
@@ -55,3 +60,19 @@ spec:
         minReplicas: 2
         replicas: 2
     scannerComponent: Enabled
+#---
+#kind: ConfigMap
+#apiVersion: v1
+#metadata:
+#  name: acs-config
+#  namespace: stackrox
+#data:
+#  auth-config.yaml: |
+#    name: openshift
+#    uiEndpoint: https://central-stackrox.apps.<domain>:443
+#    groups:
+#        - key: groups
+#          value: openshift-admin
+#          role: Admin
+#    openshift:
+#        enable: true
