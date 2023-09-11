@@ -68,7 +68,7 @@ metadata:
   namespace: stackrox
 data:
   auth-config.yaml: |
-    name: openshift
+    name: openshift-auth
     uiEndpoint: https://central-stackrox.apps.cluster-qtqww.sandbox1638.opentlc.com:443
     groups:
         - key: groups
