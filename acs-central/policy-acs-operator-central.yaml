@@ -60,19 +60,19 @@ spec:
         minReplicas: 2
         replicas: 2
     scannerComponent: Enabled
-#---
-#kind: ConfigMap
-#apiVersion: v1
-#metadata:
-#  name: acs-config
-#  namespace: stackrox
-#data:
-#  auth-config.yaml: |
-#    name: openshift
-#    uiEndpoint: https://central-stackrox.apps.<domain>:443
-#    groups:
-#        - key: groups
-#          value: openshift-admin
-#          role: Admin
-#    openshift:
-#        enable: true
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: acs-config
+  namespace: stackrox
+data:
+  auth-config.yaml: |
+    name: openshift
+    uiEndpoint: https://central-stackrox.apps.cluster-qtqww.sandbox1638.opentlc.com:443
+    groups:
+        - key: groups
+          value: openshift-admin
+          role: Admin
+    openshift:
+        enable: true
