@@ -69,6 +69,7 @@ metadata:
 data:
   auth-config.yaml: |
     name: openshift-auth
+    minimumRole: Admin
     uiEndpoint: https://central-stackrox.apps.cluster-qtqww.sandbox1638.opentlc.com:443
     groups:
         - key: groups
