@@ -36,7 +36,10 @@ spec:
   central:
     declarativeConfiguration:
       configMaps:
-        - name: "acs-config"
+        - name: "acs-auth-config"
+        - name: "acs-role-config"
+        - name: "acs-permission-set-config"
+        - name: "acs-access-scope-config"
 #      secrets:
 #        - name: "<sensitive-declarative-configs>"
     exposure:
@@ -64,16 +67,85 @@ spec:
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: acs-config
+  name: acs-auth-config
   namespace: stackrox
 data:
   auth-config.yaml: |
     name: openshift-auth
-    minimumRole: Admin
-    uiEndpoint: https://central-stackrox.apps.cluster-qtqww.sandbox1638.opentlc.com:443
+    minimumRole: None
+    uiEndpoint: https://central-stackrox.apps.{{ fromClusterClaim "name" }}:443
     groups:
         - key: groups
           value: openshift-admin
           role: Admin
+        - key: name
+          value: admin
+          role: Admin
+        - key: name
+          value: user1
+          role: Test Role
     openshift:
         enable: true
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: acs-role-config
+  namespace: stackrox
+data:
+  role-config.yaml: |
+    name: Test Role
+    description: A sample role created declaratively
+    permissionSet: ACS Permission Set Test
+    accessScope: ACS Access Scope Test
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: acs-permission-set-config
+  namespace: stackrox
+data:
+  permission-set-config.yaml: |
+    name: ACS Permission Set Test
+    description: A sample permission set created declaratively
+    resources:
+    - resource: Access 
+      access: READ_WRITE_ACCESS  
+    - resource: Administration
+      access: READ_ACCESS
+    - resource: Alert
+      access: READ_ACCESS
+    - resource: Cluster
+      access: READ_ACCESS
+    - resource: Deployment
+      access: READ_ACCESS
+    - resource: Image
+      access: READ_ACCESS
+    - resource: Namespace
+      access: READ_ACCESS
+    - resource: NetworkPolicy
+      access: READ_ACCESS
+    - resource: NetworkGraph
+      access: READ_ACCESS
+    - resource: Node
+      access: READ_ACCESS
+    - resource: Policy
+      access: READ_ACCESS
+    - resource: Secret
+      access: READ_ACCESS
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: acs-access-scope-config
+  namespace: stackrox
+data:
+  access-scope-config.yaml: |
+    name: ACS Access Scope Test
+    description: A sample access scope created declaratively
+    rules:
+    included:
+        - cluster: development 
+          namespaces:
+            - default
+        - cluster: local-cluster
