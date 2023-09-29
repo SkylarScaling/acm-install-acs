@@ -36,10 +36,10 @@ spec:
   central:
     declarativeConfiguration:
       configMaps:
-        - name: "acs-auth-config"
-        - name: "acs-role-config"
-        - name: "acs-permission-set-config"
-        - name: "acs-access-scope-config"
+        - name: acs-auth-config
+        - name: acs-role-config
+        - name: acs-permission-set-config
+        - name: acs-access-scope-config
 #      secrets:
 #        - name: "<sensitive-declarative-configs>"
     exposure:
