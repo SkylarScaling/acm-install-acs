@@ -144,7 +144,7 @@ data:
     name: ACS Access Scope Test
     description: A sample access scope created declaratively
     rules:
-    included:
+      included:
         - cluster: development 
           namespaces:
             - default
