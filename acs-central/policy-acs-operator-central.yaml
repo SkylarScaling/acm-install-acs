@@ -21,7 +21,7 @@ metadata:
   name: rhacs-operator
   namespace: rhacs-operator
 spec:
-  channel: stable
+  channel: rhacs-4.2
   installPlanApproval: Automatic
   name: rhacs-operator
   source: redhat-operators
