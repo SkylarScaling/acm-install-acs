@@ -39,7 +39,7 @@ policies:
   controls:
     - SI-5 Security Alerts Advisories and Directives
   manifests:
-    - path: acs-sensor/policy-acs-central-ca-bundle.yaml
+    - path: acs-secured/policy-acs-central-ca-bundle.yaml
 - name: policy-acs-sync-resources
   categories:
     - SI System and Information Integrity
@@ -47,7 +47,7 @@ policies:
   controls:
     - SI-5 Security Alerts Advisories and Directives
   manifests:
-    - path: acs-sensor/policy-acs-sync-resources.yaml
+    - path: acs-secured/policy-acs-sync-resources.yaml
 - name: policy-advanced-managed-cluster-security
   categories:
     - SI System and Information Integrity
@@ -55,7 +55,7 @@ policies:
   controls:
     - SI-5 Security Alerts Advisories and Directives
   manifests:
-    - path: acs-sensor/policy-advanced-managed-cluster-security.yaml
+    - path: acs-secured/policy-advanced-managed-cluster-security.yaml
   policySets:
     - openshift-acs-clusters
 - name: policy-advanced-managed-cluster-status
@@ -64,7 +64,7 @@ policies:
   controls:
     - SI-5 Security Alerts Advisories and Directives
   manifests:
-    - path: acs-sensor/policy-advanced-managed-cluster-status.yaml
+    - path: acs-secured/policy-advanced-managed-cluster-status.yaml
   policySets:
     - openshift-acs-hub
     - openshift-acs-clusters
