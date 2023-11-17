@@ -95,4 +95,4 @@ policySets:
       the components that install to every managed cluster.
     name: openshift-acs-clusters
     placement:
-      placementPath: placements/clusters-placement.yaml
+      placementRulePath: placements/clusters-placement.yaml
