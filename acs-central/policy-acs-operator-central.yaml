@@ -45,6 +45,9 @@ spec:
     persistence:
       persistentVolumeClaim:
         claimName: stackrox-db
+    declarativeConfiguration:
+      configMaps:
+        - name: "declarative-configurations"
   egress:
     connectivityPolicy: Online
   scanner:
