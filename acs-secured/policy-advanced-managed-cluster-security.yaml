@@ -67,6 +67,8 @@ metadata:
   namespace: stackrox
   name: stackrox-secured-cluster-services
 spec:
+  nodeSelector:
+    node-role.kubernetes.io/infra: ""
   clusterName: |
     {{ fromClusterClaim "name" }}
   auditLogs:
@@ -74,16 +76,6 @@ spec:
   centralEndpoint: |
     {{ fromSecret "stackrox" "sensor-tls" "acs-host" | base64dec }}
   admissionControl:
-    nodeSelector:
-      matchLabels:
-        node-role.kubernetes.io/infra: ""
-    tolerations:
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/infra
-        value: reserved
-      - effect: NoExecute
-        key: node-role.kubernetes.io/infra
-        value: reserved
     listenOnCreates: false
     listenOnEvents: true
     listenOnUpdates: false
@@ -92,25 +84,3 @@ spec:
       collection: EBPF
       imageFlavor: Regular
     taintToleration: TolerateTaints
-  scanner:
-    nodeSelector:
-      matchLabels:
-        node-role.kubernetes.io/infra: ""
-    tolerations:
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/infra
-        value: reserved
-      - effect: NoExecute
-        key: node-role.kubernetes.io/infra
-        value: reserved
-  sensor:
-    nodeSelector:
-      matchLabels:
-        node-role.kubernetes.io/infra: ""
-    tolerations:
-      - effect: NoSchedule
-        key: node-role.kubernetes.io/infra
-        value: reserved
-      - effect: NoExecute
-        key: node-role.kubernetes.io/infra
-        value: reserved
