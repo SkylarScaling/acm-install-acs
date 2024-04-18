@@ -34,17 +34,6 @@ metadata:
   name: stackrox-central-services
 spec:
   central:
-    db:
-      nodeSelector:
-        node-role.kubernetes.io/infra: ""
-      tolerations:
-        - key: node-role.kubernetes.io/infra
-          operator: exists
-          effect: NoSchedule
-      isEnabled: Default
-      persistence:
-        persistentVolumeClaim:
-          claimName: central-db
     exposure:
       loadBalancer:
         enabled: false
