@@ -39,11 +39,8 @@ spec:
         node-role.kubernetes.io/infra: ""
       tolerations:
         - key: node-role.kubernetes.io/infra
-          value: reserved
+          operator: exists
           effect: NoSchedule
-        - key: node-role.kubernetes.io/infra
-          value: reserved
-          effect: NoExecute
       isEnabled: Default
       persistence:
         persistentVolumeClaim:
@@ -66,11 +63,8 @@ spec:
       node-role.kubernetes.io/infra: ""
     tolerations:
       - key: node-role.kubernetes.io/infra
-        value: reserved
+        operator: exists
         effect: NoSchedule
-      - key: node-role.kubernetes.io/infra
-        value: reserved
-        effect: NoExecute
   egress:
     connectivityPolicy: Online
   scanner:
@@ -79,21 +73,15 @@ spec:
         node-role.kubernetes.io/infra: ""
       tolerations:
         - key: node-role.kubernetes.io/infra
-          value: reserved
+          operator: exists
           effect: NoSchedule
-        - key: node-role.kubernetes.io/infra
-          value: reserved
-          effect: NoExecute
     analyzer:
       nodeSelector:
         node-role.kubernetes.io/infra: ""
       tolerations:
         - key: node-role.kubernetes.io/infra
-          value: reserved
+          operator: exists
           effect: NoSchedule
-        - key: node-role.kubernetes.io/infra
-          value: reserved
-          effect: NoExecute
       scaling:
         autoScaling: Enabled
         maxReplicas: 5
