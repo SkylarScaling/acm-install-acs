@@ -3,7 +3,7 @@ kind: PolicyGenerator
 metadata:
   name: policy-openshift-acs-install
 placementBindingDefaults:
-  name: "acs-install-binding"
+  name: acs-install-binding
 policyDefaults:
   categories:
     - CM Configuration Management

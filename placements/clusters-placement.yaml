@@ -1,7 +1,7 @@
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
-  name: placement-openshift-acs-managed-clusters
+  name: placement-openshift-acs-secured-clusters
   namespace: acs-install-policies
 spec:
   clusterSelector:
