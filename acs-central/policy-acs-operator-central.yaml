@@ -34,6 +34,11 @@ metadata:
   name: stackrox-central-services
 spec:
   central:
+    nodeSelector:
+      node-role.kubernetes.io/infra: ""
+    tolerations:
+      - key: node-role.kubernetes.io/infra
+        effect: NoSchedule
     exposure:
       loadBalancer:
         enabled: false
@@ -48,12 +53,6 @@ spec:
     declarativeConfiguration:
       configMaps:
         - name: "declarative-configurations"
-    nodeSelector:
-      node-role.kubernetes.io/infra: ""
-    tolerations:
-      - key: node-role.kubernetes.io/infra
-        operator: exists
-        effect: NoSchedule
   egress:
     connectivityPolicy: Online
   scanner:
@@ -62,14 +61,12 @@ spec:
         node-role.kubernetes.io/infra: ""
       tolerations:
         - key: node-role.kubernetes.io/infra
-          operator: exists
           effect: NoSchedule
     analyzer:
       nodeSelector:
         node-role.kubernetes.io/infra: ""
       tolerations:
         - key: node-role.kubernetes.io/infra
-          operator: exists
           effect: NoSchedule
       scaling:
         autoScaling: Enabled
