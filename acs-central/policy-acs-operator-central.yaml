@@ -39,6 +39,7 @@ spec:
         node-role.kubernetes.io/infra: ""
       tolerations:
         - key: node-role.kubernetes.io/infra
+          operator: exists
           effect: NoSchedule
       isEnabled: Default
       persistence:
@@ -62,6 +63,7 @@ spec:
       node-role.kubernetes.io/infra: ""
     tolerations:
       - key: node-role.kubernetes.io/infra
+        operator: exists
         effect: NoSchedule
   egress:
     connectivityPolicy: Online
@@ -71,12 +73,14 @@ spec:
         node-role.kubernetes.io/infra: ""
       tolerations:
         - key: node-role.kubernetes.io/infra
+          operator: exists
           effect: NoSchedule
     analyzer:
       nodeSelector:
         node-role.kubernetes.io/infra: ""
       tolerations:
         - key: node-role.kubernetes.io/infra
+          operator: exists
           effect: NoSchedule
       scaling:
         autoScaling: Enabled
