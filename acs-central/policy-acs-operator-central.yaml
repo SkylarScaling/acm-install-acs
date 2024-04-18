@@ -33,9 +33,21 @@ metadata:
   namespace: stackrox
   name: stackrox-central-services
 spec:
-  nodeSelector:
-    node-role.kubernetes.io/infra: ""
   central:
+    db:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+        - key: node-role.kubernetes.io/infra
+          value: reserved
+          effect: NoSchedule
+        - key: node-role.kubernetes.io/infra
+          value: reserved
+          effect: NoExecute
+      isEnabled: Default
+      persistence:
+        persistentVolumeClaim:
+          claimName: central-db
     exposure:
       loadBalancer:
         enabled: false
@@ -50,10 +62,38 @@ spec:
     declarativeConfiguration:
       configMaps:
         - name: "declarative-configurations"
-  egress:
-    connectivityPolicy: Online
+    egress:
+      connectivityPolicy: Online
+    nodeSelector:
+      node-role.kubernetes.io/infra: ""
+    tolerations:
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoSchedule
+      - key: node-role.kubernetes.io/infra
+        value: reserved
+        effect: NoExecute
   scanner:
+    db:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+        - key: node-role.kubernetes.io/infra
+          value: reserved
+          effect: NoSchedule
+        - key: node-role.kubernetes.io/infra
+          value: reserved
+          effect: NoExecute
     analyzer:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+        - key: node-role.kubernetes.io/infra
+          value: reserved
+          effect: NoSchedule
+        - key: node-role.kubernetes.io/infra
+          value: reserved
+          effect: NoExecute
       scaling:
         autoScaling: Enabled
         maxReplicas: 5

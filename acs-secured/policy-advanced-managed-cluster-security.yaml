@@ -67,8 +67,6 @@ metadata:
   namespace: stackrox
   name: stackrox-secured-cluster-services
 spec:
-  nodeSelector:
-    node-role.kubernetes.io/infra: ""
   clusterName: |
     {{ fromClusterClaim "name" }}
   auditLogs:
