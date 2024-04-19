@@ -39,6 +39,12 @@ spec:
     tolerations:
       - key: node-role.kubernetes.io/infra
         effect: NoSchedule
+    db:
+      nodeSelector:
+        node-role.kubernetes.io/infra: ""
+      tolerations:
+        - key: node-role.kubernetes.io/infra
+          effect: NoSchedule
     exposure:
       loadBalancer:
         enabled: false
