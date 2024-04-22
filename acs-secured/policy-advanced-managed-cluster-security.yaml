@@ -67,6 +67,11 @@ metadata:
   namespace: stackrox
   name: stackrox-secured-cluster-services
 spec:
+  nodeSelector:
+    node-role.kubernetes.io/infra: ""
+  tolerations:
+    - key: node-role.kubernetes.io/infra
+      effect: NoSchedule
   clusterName: |
     {{ fromClusterClaim "name" }}
   auditLogs:
