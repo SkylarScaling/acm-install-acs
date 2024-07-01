@@ -1,9 +1,9 @@
 apiVersion: apps.open-cluster-management.io/v1
 kind: PlacementRule
 metadata:
-  name: placement-openshift-acs-hub
-  namespace: acs-install-policies
+  name: placement-openshift-acm-hub
+  namespace: acm-install-policies
 spec:
   clusterSelector:
     matchLabels:
-        name: local-cluster
+      name: local-cluster

@@ -21,7 +21,7 @@ metadata:
   name: rhacs-operator
   namespace: rhacs-operator
 spec:
-  channel: stable
+  channel: rhacs-4.4
   installPlanApproval: Automatic
   name: rhacs-operator
   source: redhat-operators
@@ -56,9 +56,6 @@ spec:
     persistence:
       persistentVolumeClaim:
         claimName: stackrox-db
-    declarativeConfiguration:
-      configMaps:
-        - name: "declarative-configurations"
   egress:
     connectivityPolicy: Online
   scanner:
@@ -79,3 +76,4 @@ spec:
         maxReplicas: 5
         minReplicas: 2
         replicas: 2
+    scannerComponent: Enabled
