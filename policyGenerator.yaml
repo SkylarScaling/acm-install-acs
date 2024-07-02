@@ -9,7 +9,7 @@ policyDefaults:
     - CM Configuration Management
   controls: 
     - CM-2 Baseline Configuration
-  namespace: acs-install-policies
+  namespace: acm-install-policies
   policySets:
     - openshift-acs-hub
   remediationAction: enforce
