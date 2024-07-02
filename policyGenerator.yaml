@@ -57,7 +57,6 @@ policies:
   manifests:
     - path: acs-secured/policy-advanced-managed-cluster-security.yaml
   policySets:
-    - openshift-acs-hub
     - openshift-acs-clusters
 - name: policy-advanced-managed-cluster-status
   categories:
