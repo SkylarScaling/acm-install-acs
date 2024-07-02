@@ -19,7 +19,6 @@ metadata:
   namespace: openshift-compliance
 spec:
   installPlanApproval: Automatic
-  channel: 4.7
   name: compliance-operator
   source: redhat-operators
   sourceNamespace: openshift-marketplace
