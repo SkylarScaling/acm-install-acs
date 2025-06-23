@@ -133,16 +133,16 @@ policies:
     - openshift-acm-hub
 # Compliance Operator Policies - end
 policySets:
-  - name: openshift-acm-hub
-    description: The OpenShift ACS policy set applies several policies
-      that will install the OpenShift Advanced Cluster Security using best practices. 
+  - name: acs-central
+    description: This OpenShift ACS Policy Set applies several policies
+      that will install the OpenShift Advanced Cluster Security Central components. 
       This policy set is focused on the components that install to the Advanced Cluster Management hub.
     placement:
       placementRulePath: placements/hub-placement.yaml
 
-  - name: openshift-acm-clusters
-    description: The OpenShift ACS policy set applies several policies
-      that will install the OpenShift Advanced Cluster Security using best practices. 
+  - name: acs-secured
+    description: This OpenShift ACS Policy Set applies several policies
+      that will install the OpenShift Advanced Cluster Security Secured Cluster components. 
       This policy set is focused on the components that install to every managed cluster.
     placement:
       placementRulePath: placements/clusters-placement.yaml
