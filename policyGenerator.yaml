@@ -11,7 +11,7 @@ policyDefaults:
     - CM-2 Baseline Configuration
   namespace: acm-install-policies
   policySets:
-    - openshift-acm-hub
+    - acs-central
   remediationAction: enforce
   severity: medium
   standards:
@@ -105,7 +105,7 @@ policies:
   manifests:
     - path: input-sensor/policy-advanced-managed-cluster-security.yaml
   policySets:
-    - openshift-acm-clusters
+    - acs-secured
 
 - name: policy-advanced-managed-cluster-status
   categories:
@@ -115,8 +115,8 @@ policies:
   manifests:
     - path: input-sensor/policy-advanced-managed-cluster-status.yaml
   policySets:
-    - openshift-acm-hub
-    - openshift-acm-clusters
+    - acs-central
+    - acs-secured
   remediationAction: inform
 # ACS Policies - end
 # Compliance Operator Policies - start
@@ -129,8 +129,8 @@ policies:
   manifests:
     - path: compliance-operator/policy-compliance-operator-install.yaml
   policySets:
-    - openshift-acm-clusters
-    - openshift-acm-hub
+    - acs-secured
+    - acs-central
 # Compliance Operator Policies - end
 policySets:
   - name: acs-central
