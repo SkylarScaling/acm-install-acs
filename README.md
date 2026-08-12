@@ -1,99 +1,41 @@
 # acm-install-acs
-Deploy ACS to ACM hub and managed clusters using ACM policygenerator
+Deploy ACS to ACM hub and managed clusters using ACM PolicyGenerator and OpenShift GitOps.
 
-Notes:
-- User needs to be added to open-cluster-management:subscription-admin ClusterRoleBinding
+## Overview
 
+This repo contains ACM policies that install and configure Red Hat Advanced Cluster Security (ACS) across an ACM hub and its managed clusters. Policies are delivered to the hub via an ArgoCD Application using the ACM PolicyGenerator kustomize plugin.
 
-    kind: ClusterRoleBinding  
-    apiVersion: rbac.authorization.k8s.io/v1  
-    metadata:  
-      name: 'open-cluster-management:subscription-admin'
-    subjects:
-      - kind: User
-        apiGroup: rbac.authorization.k8s.io
-        name: admin
-    roleRef:
-      apiGroup: rbac.authorization.k8s.io
-      kind: ClusterRole
-      name: 'open-cluster-management:subscription-admin'
+## Prerequisites
 
-- Add user to system:image-puller role for project
+- Red Hat Advanced Cluster Management 2.6+
+- OpenShift GitOps (ArgoCD) with the `policy-generator` Config Management Plugin configured
+- The `global` ManagedClusterSet bound to the `acm-install-policies` namespace (included in `placements/managed-cluster-set-binding.yaml`)
 
+## Deployment
 
-    kind: ClusterRoleBinding  
-    apiVersion: rbac.authorization.k8s.io/v1
-    metadata:
-      name: sky-image-pull-binding
-    subjects:
-      - kind: User
-        apiGroup: rbac.authorization.k8s.io
-        name: admin
-    roleRef:
-      apiGroup: rbac.authorization.k8s.io
-      kind: ClusterRole
-      name: 'system:image-puller'
+This repo is deployed by the ArgoCD Application defined in `gitops-install-acs`. Apply that repo to the hub cluster:
 
-A subscription to this repo might look like this:
+```bash
+oc apply -f gitops-install-acs/acs/01-acs-policy-application.yaml
+```
 
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: acs-install-policies
-    ---
-    apiVersion: app.k8s.io/v1beta1
-    kind: Application
-    metadata:
-      name: acs-install-policies
-      namespace: acs-install-policies
-    spec:
-      componentKinds:
-        - group: apps.open-cluster-management.io
-          kind: Subscription
-      selector:
-        matchExpressions:
-          - key: app
-            operator: In
-            values:
-              - acs-install-policies
-    ---
-    apiVersion: apps.open-cluster-management.io/v1
-    kind: Channel
-    metadata:
-      annotations:
-        apps.open-cluster-management.io/reconcile-rate: medium
-      name: acs-install-policies-channel
-      namespace: acs-install-policies
-    spec:
-      type: Git
-      pathname: https://github.com/skylarscaling/acm-install-acs.git
-    ---
-    apiVersion: apps.open-cluster-management.io/v1
-    kind: Subscription
-    metadata:
-      annotations:
-        apps.open-cluster-management.io/git-branch: main
-        # apps.open-cluster-management.io/git-path: N/A
-        apps.open-cluster-management.io/reconcile-option: merge
-      labels:
-        app: acs-install-policies
-      name: acs-install-policies-subscription
-      namespace: acs-install-policies
-    spec:
-      channel: acs-install-policies/acs-install-policies-channel
-      placement:
-        placementRef:
-          kind: PlacementRule
-          name: acs-install-policies-placement
-    ---
-    apiVersion: apps.open-cluster-management.io/v1
-    kind: PlacementRule
-    metadata:
-      labels:
-        app: acs-install-policies
-      name: acs-install-policies-placement
-      namespace: acs-install-policies
-    spec:
-      clusterSelector:
-        matchLabels:
-          name: local-cluster
+ArgoCD will use the `policy-generator` CMP to run `kustomize build --enable-alpha-plugins` and apply the resulting ACM policies to the hub.
+
+## Policy Sets
+
+### acs-central (hub cluster)
+Installs ACS Central components on the ACM hub:
+1. `policy-acs-operator-central` — installs the RHACS operator and Central CR
+2. `policy-acs-central-status` — verifies Central deployments are healthy
+3. `policy-acs-central-ca-bundle` — creates init-bundle RBAC and Job
+4. `policy-acs-sync-resources` — syncs TLS secrets to managed clusters
+5. `policy-acs-monitor-certs` — monitors init-bundle certificate expiry
+6. `policy-acs-central-ca-bundle-expired` — rotates expired certificates
+7. `policy-advanced-managed-cluster-status` — verifies sensor/collector on hub
+8. `policy-compliance-operator-install` — installs the Compliance Operator
+
+### acs-secured (all managed clusters)
+Installs ACS Secured Cluster components on each managed cluster:
+1. `policy-advanced-managed-cluster-security` — installs RHACS operator and SecuredCluster CR
+2. `policy-advanced-managed-cluster-status` — verifies sensor/collector are healthy
+3. `policy-compliance-operator-install` — installs the Compliance Operator
