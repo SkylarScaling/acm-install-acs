@@ -1,3 +1,5 @@
+resources:
+  - placements/managed-cluster-set-binding.yaml
 generators:
   - policyGenerator.yaml
 commonLabels:

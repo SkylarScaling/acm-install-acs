@@ -10,6 +10,12 @@ spec:
     collection: Auto
   centralEndpoint: |
     {{ fromSecret "stackrox" "sensor-tls" "acs-host" | base64dec }}
+  sensor:
+    nodeSelector:
+      node-role.kubernetes.io/infra: ""
+    tolerations:
+      - key: node-role.kubernetes.io/infra
+        effect: NoSchedule
   admissionControl:
     listenOnCreates: false
     listenOnEvents: true
